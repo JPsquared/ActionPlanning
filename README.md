@@ -24,6 +24,7 @@ as short a time as possible.
 Warehouse states will be stored as .json files, the text of which 
 might look like this:
 
+```
 {
   "RED": [
     3,
@@ -38,7 +39,9 @@ might look like this:
     -5.9
   ]
 }
-In this one the red balloon, for example, is located at (x,y)=(3,5) in the map frame. 
+```
+
+In this one the red balloon, for example, is located at ```(x, y) = (3, 5)``` in the map frame. 
 If read as a .json, it will load conveniently as a dictionary without you having to 
 write a parser.
 
