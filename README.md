@@ -4,7 +4,8 @@
 
 ## Description
 
-Warehouse Organization Project
+### Warehouse Organization Project
+
 More and more, robots are responsible for organizing items in warehouses. We are going 
 to use our robots to autonomously maintain an organized balloon warehouse.
 
@@ -45,7 +46,8 @@ In this one the red balloon, for example, is located at ```(x, y) = (3, 5)``` in
 If read as a .json, it will load conveniently as a dictionary without you having to 
 write a parser.
 
-Define a logic
+### Define a logic
+
 Define a logic which allows you to fully describe the world state. Each action should 
 have the preconditions, addition, and deletions of the state that allow you to predict 
 the world state after taking each of the actions. Write these out, you’ll turn them in.
@@ -56,10 +58,12 @@ PICKUP picks up a specified object and puts it in the robot’s payload (the rob
 the object would need to be in about the same place). PUTDOWN removes an object from 
 the robot’s payload and puts it at the robot’s current location.
 
-Perform graph search
+### Perform graph search
+
 Print out a sequence of actions that will result in the old warehouse state being 
 converted to the new warehouse state in a minimal amount of time.
 
-Perform the actions
+### Perform the actions
+
 Drive around, correctly approaching the needed balloons, and printing the pickups and 
 putdown commands at the right time.
