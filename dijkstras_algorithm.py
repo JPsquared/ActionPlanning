@@ -56,7 +56,7 @@ class PriorityQueue:
 
     def par(self, i):
         # returns the index of parent
-        return floor(i / 2)
+        return int(floor(i / 2))
 
     def swap(self, i, j):
         # swaps array elements at indices i and j
@@ -69,7 +69,7 @@ class PriorityQueue:
 
     def decrease_key(self, tup, new_d):
         idx = self.pos[tup[1]]
-        # assuming the new_d is atmost old_d
+        # assuming the new_d is at most old_d
         self.array[idx] = (new_d, tup[1])
         while idx > 0 and self.array[self.par(idx)][0] > self.array[idx][0]:
             self.swap(idx, self.par(idx))
