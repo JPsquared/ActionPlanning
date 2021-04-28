@@ -160,7 +160,7 @@ class Graph:
         for u in path:
             print u,
             if u != dest:
-                print "-> ",
+                print "->",
 
         print "\nTotal cost of path: ", cost
 
