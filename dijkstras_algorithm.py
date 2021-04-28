@@ -158,9 +158,9 @@ class Graph:
 
         print("----Path to reach {} from {}----".format(dest, src))
         for u in path:
-            print(u,)
+            print u,
             if u != dest:
-                print("-> ",)
+                print "-> ",
 
         print "\nTotal cost of path: ", cost
 
