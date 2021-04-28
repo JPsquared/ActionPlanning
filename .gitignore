@@ -1,2 +1,6 @@
 # ignore all compiled bytecode files
 *.pyc
+
+# ignore chaff files
+*.xml
+*.iml
