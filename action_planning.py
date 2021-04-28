@@ -1,6 +1,7 @@
 # MAIN PROJECT EXECUTABLE
 import json
-from dijkstras_algorithm import Graph
+import dijkstras_algorithm
+import dot_parser
 
 
 if __name__ == "__main__":
