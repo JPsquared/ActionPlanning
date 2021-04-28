@@ -102,7 +102,7 @@ class Graph:
     def show_graph(self):
         # u -> v(w)
         for u in self.adjList:
-            print(u, "->", " -> ".join(str("{}({})".format(v, w)) for v, w in self.adjList[u]))
+            print u, "->", " -> ".join(str("{}({})".format(v, w)) for v, w in self.adjList[u])
 
     def dijkstra(self, src):
         # Flush old junk values in par[]
@@ -162,7 +162,7 @@ class Graph:
             if u != dest:
                 print("-> ",)
 
-        print("\nTotal cost of path: ", cost)
+        print "\nTotal cost of path: ", cost
 
 
 if __name__ == "__main__":
