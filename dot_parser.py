@@ -18,8 +18,8 @@ def parse_dotfile(filename):
     raw_lines = raw.split('\n')
     # get rid of the first line
     raw_lines.pop(0)
-    # create list of node keys and node locations
-    node_list = []
+    # create dict of node keys and node locations
+    node_list = {}
     for line in raw_lines:
         # strip away leading whitespace
         string = line.strip()
@@ -28,17 +28,11 @@ def parse_dotfile(filename):
         if parts[1][0] != '[':
             break
         key = parts[0]
-        print parts[0]  # here we see all unique key values
-        print parts[1]  # here is the rest of the string that contains the location
-        flag = re.match(r'\(-?\d+\.?\d*,\s-?\d+\.?\d*\)', parts[1])
-        print flag
-        location = None
-        if flag:
-            print flag.group()
-            location = tuple(flag.group())
-        else:
-            print "No match"
-        node_list.append((key, location))
+        x = float(re.search(r'\(-?\d+\.?\d*,\s', parts[1]).group()[1:-2])
+        y = float(re.search(r',\s-?\d+\.?\d*\)', parts[1]).group()[2:-1])
+        location = (x, y)
+        node_list[key] = location
+    print node_list
 
 
 if __name__ == "__main__":
