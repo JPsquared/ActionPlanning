@@ -2,12 +2,11 @@
 # Author: Shubham Malik
 # References: https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm
 
-import math
-import sys
+from math import floor
+from sys import maxsize
+
 
 # For storing the vertex set to retrieve node with the lowest distance
-
-
 class PriorityQueue:
     # Based on Min Heap
     def __init__(self):
@@ -18,25 +17,25 @@ class PriorityQueue:
     def isEmpty(self):
         return self.cur_size == 0
 
-    def min_heapify(self, idx):
-        lc = self.left(idx)
-        rc = self.right(idx)
-        if lc < self.cur_size and self.array(lc)[0] < self.array(idx)[0]:
+    def min_heapify(self, index):
+        lc = self.left(index)
+        rc = self.right(index)
+        if lc < self.cur_size and self.array[lc][0] < self.array[index][0]:
             smallest = lc
         else:
-            smallest = idx
-        if rc < self.cur_size and self.array(rc)[0] < self.array(smallest)[0]:
+            smallest = index
+        if rc < self.cur_size and self.array[rc][0] < self.array[smallest][0]:
             smallest = rc
-        if smallest != idx:
-            self.swap(idx, smallest)
+        if smallest != index:
+            self.swap(index, smallest)
             self.min_heapify(smallest)
 
     def insert(self, tup):
         # Inserts a node into the Priority Queue
         self.pos[tup[1]] = self.cur_size
         self.cur_size += 1
-        self.array.append((sys.maxsize, tup[1]))
-        self.decrease_key((sys.maxsize, tup[1]), tup[0])
+        self.array.append((maxsize, tup[1]))
+        self.decrease_key((maxsize, tup[1]), tup[0])
 
     def extract_min(self):
         # Removes and returns the min element at top of priority queue
@@ -57,7 +56,7 @@ class PriorityQueue:
 
     def par(self, i):
         # returns the index of parent
-        return math.floor(i / 2)
+        return floor(i / 2)
 
     def swap(self, i, j):
         # swaps array elements at indices i and j
@@ -86,7 +85,7 @@ class Graph:
         self.par = [-1] * self.num_nodes  # To store the path
 
     def add_edge(self, u, v, w):
-        #  Edge going from node u to v and v to u with weight w
+        # Edge going from node u to v and v to u with weight w
         # u (w)-> v, v (w) -> u
         # Check if u already in graph
         if u in self.adjList.keys():
@@ -103,7 +102,7 @@ class Graph:
     def show_graph(self):
         # u -> v(w)
         for u in self.adjList:
-            print(u, "->", " -> ".join(str(f"{v}({w})") for v, w in self.adjList[u]))
+            print(u, "->", " -> ".join(str("{}({})".format(v, w)) for v, w in self.adjList[u]))
 
     def dijkstra(self, src):
         # Flush old junk values in par[]
@@ -114,7 +113,7 @@ class Graph:
         Q.insert((0, src))  # (dist from src, node)
         for u in self.adjList.keys():
             if u != src:
-                self.dist[u] = sys.maxsize  # Infinity
+                self.dist[u] = maxsize  # Infinity
                 self.par[u] = -1
 
         while not Q.isEmpty():
@@ -124,7 +123,7 @@ class Graph:
             for v, w in self.adjList[u]:
                 new_dist = self.dist[u] + w
                 if self.dist[v] > new_dist:
-                    if self.dist[v] == sys.maxsize:
+                    if self.dist[v] == maxsize:
                         Q.insert((new_dist, v))
                     else:
                         Q.decrease_key((self.dist[v], v), new_dist)
@@ -135,9 +134,9 @@ class Graph:
         self.show_distances(src)
 
     def show_distances(self, src):
-        print(f"Distance from node: {src}")
+        print("Distance from node: {}".format(src))
         for u in range(self.num_nodes):
-            print(f"Node {u} has distance: {self.dist[u]}")
+            print("Node {} has distance: {}".format(u, self.dist[u]))
 
     def show_path(self, src, dest):
         # To show the shortest path from src to dest
@@ -157,11 +156,11 @@ class Graph:
         path.append(src)
         path.reverse()
 
-        print(f"----Path to reach {dest} from {src}----")
+        print("----Path to reach {} from {}----".format(dest, src))
         for u in path:
-            print(f"{u}", end=" ")
+            print(u,)
             if u != dest:
-                print("-> ", end="")
+                print("-> ",)
 
         print("\nTotal cost of path: ", cost)
 
