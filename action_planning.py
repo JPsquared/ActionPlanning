@@ -18,12 +18,8 @@ if __name__ == "__main__":
     with open("test_warehouse_end.json") as json_file:
         end_pos = json.load(json_file)
         print end_pos
-    # create graph
-    # g = Graph(10)  # call with number of nodes in graph
-    # call add_edge()
-    # do in a loop
+    # generate state graph
 
-    # call dijkstra's
-    # g.dijkstra(0)  # call with start node
-    # call show_path(x, y)
-    # g.show_path(0, 9)  # call with start and end node labels
+    # run A* on state graph to get optimal decision path
+
+    # execute list of decisions
