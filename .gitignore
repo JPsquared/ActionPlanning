@@ -4,3 +4,6 @@
 # ignore chaff files
 *.xml
 *.iml
+
+# ignore the A* example file
+a_star_github.py
