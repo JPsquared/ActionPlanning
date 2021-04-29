@@ -7,10 +7,6 @@ def distance(p1, p2):  # point: (x, y)
     return sqrt(pow(p2[0] - p1[0], 2) + pow(p2[1] - p1[1], 2))
 
 
-def pull_coordinates(s):
-    pass
-
-
 def parse_dotfile(filename):
     dotfile = open(filename, 'r')
     raw = dotfile.read()
