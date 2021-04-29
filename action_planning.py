@@ -19,7 +19,9 @@ if __name__ == "__main__":
         end_pos = json.load(json_file)
         print end_pos
     # generate state graph
+    # edges need to have the f cost and the decision that resulted in their creation
 
     # run A* on state graph to get optimal decision path
 
     # execute list of decisions
+
