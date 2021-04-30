@@ -1,6 +1,7 @@
 # Parse given dot file to extract useful information from it
 from math import sqrt
 import re
+import random, string
 
 
 def distance(p1, p2):  # point: (x, y)
@@ -16,9 +17,9 @@ def parse_dotfile(filename):
     raw_lines.pop(0)
     # create dict of node keys and node locations
     node_list = {}
-    for line in raw_lines:
+    for i in range(len(raw_lines)):
         # strip away leading whitespace
-        string = line.strip()
+        string = raw_lines[i].strip()
         # pull key value from beginning of string
         parts = string.split(' ', 1)
         if parts[1][0] != '[':
@@ -28,7 +29,7 @@ def parse_dotfile(filename):
         y = float(re.search(r',\s-?\d+\.?\d*\)', parts[1]).group()[2:-1])
         location = (x, y)
         node_list[key] = location
-    print node_list
+    print node_list.keys()
 
 
 if __name__ == "__main__":
