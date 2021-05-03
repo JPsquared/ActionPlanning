@@ -13,8 +13,9 @@ GOAL_JSON = "states/simple.json"
 
 
 # defines the structure of the data contained in each node in the A* graph
-class StateNode:
-    def __init__(self, red, purple, blue, green, robot, decision):  # each of the parameters is a location stored in tuple form
+class StateNode(AStar):
+    def __init__(self, red, purple, blue, green, robot, decision):
+        # each of the parameters is a location stored in tuple form
         # if None, then the balloon is being held
         self.red_location = red
         self.purple_location = purple
@@ -25,29 +26,32 @@ class StateNode:
         # facilitates recreation of decision path once path is found
         self.decision = decision
 
+    def heuristic(current_node, goal_node):
+        # a good starter heuristic is to take the difference in position of each of the balloons and to
+        # sum them and then divide by 2
+        pass
 
-def heuristic(current_node, goal_node):
-    # a good starter heuristic is to take the difference in position of each of the balloons and to
-    # sum them and then divide by 2
-    pass
+    # returns a list of all children that can be generated from this node
+    def neighbors(current_node):
+        to_return = []
+        # create state representations of each action
+        # drive to one of the four balloons or one of the four balloon goal locations
 
+        # if any of the four balloons are close, try to pick it up
+        current_node
 
-# returns a list of all children that can be generated from this node
-def neighbors(current_node):
-    pass
+        # try to drop a balloon off if possible
 
+    # returns the true distance between two nodes, a and b
+    # used to calculate g cost
+    def distance(node_a, node_b):
+        # this should probably just be a driving distance value
+        # might need to use dijkstra's on the hopper map to calculate this
+        pass
 
-# returns the true distance between two nodes, a and b
-# used to calculate g cost
-def distance(node_a, node_b):
-    # this should probably just be a driving distance value
-    # might need to use dijkstra's on the hopper map to calculate this
-    pass
-
-
-# returns true if the values for the locations of all the balloons are in the right place
-def is_goal_reached(current_node, goal_node):
-    pass
+    # returns true if the values for the locations of all the balloons are in the right place
+    def is_goal_reached(current_node, goal_node):
+        pass
 
 # def distance(p1, p2):  # point: (x, y)
 #     return sqrt(pow(p2[0] - p1[0], 2) + pow(p2[1] - p1[1], 2))
