@@ -4,3 +4,6 @@
 # ignore chaff files
 *.xml
 *.iml
+
+# ignore swapfiles
+*.swp
