@@ -1,11 +1,5 @@
 # Parse given dot file to extract useful information from it
-from math import sqrt
-import re
-import random, string
-
-
-def distance(p1, p2):  # point: (x, y)
-    return sqrt(pow(p2[0] - p1[0], 2) + pow(p2[1] - p1[1], 2))
+from re import search
 
 
 def parse_dotfile(filename):
@@ -17,19 +11,30 @@ def parse_dotfile(filename):
     raw_lines.pop(0)
     # create dict of node keys and node locations
     node_list = {}
+    graph = {}
     for i in range(len(raw_lines)):
         # strip away leading whitespace
         string = raw_lines[i].strip()
         # pull key value from beginning of string
         parts = string.split(' ', 1)
-        if parts[1][0] != '[':
+        if parts[0] == '}':
             break
-        key = parts[0]
-        x = float(re.search(r'\(-?\d+\.?\d*,\s', parts[1]).group()[1:-2])
-        y = float(re.search(r',\s-?\d+\.?\d*\)', parts[1]).group()[2:-1])
-        location = (x, y)
-        node_list[key] = location
-    print node_list.keys()
+        elif parts[1][0] == '[':  # these are lines that contain node locations
+            key = parts[0]
+            x = float(search(r'\(-?\d+\.?\d*,\s', parts[1]).group()[1:-2])
+            y = float(search(r',\s-?\d+\.?\d*\)', parts[1]).group()[2:-1])
+            location = (x, y)
+            node_list[key] = location
+        elif parts[1][0] == '-':  # these are lines that contain graph connections
+            key = parts[0]
+            connection = search(r'[0-9][ab]', parts[1]).group()
+            print connection
+            if key in graph:
+                graph[key].append(connection)
+            else:
+                graph[key] = [connection]
+
+    return node_list, graph
 
 
 if __name__ == "__main__":
