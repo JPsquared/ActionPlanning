@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-""" generic A-Star path searching algorithm """
+# """ generic A-Star path searching algorithm """
+# """ Copied from https://github.com/jrialland/python-astar """
 
 from abc import ABCMeta, abstractmethod
 from heapq import heappush, heappop, heapify
