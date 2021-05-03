@@ -33,10 +33,10 @@ class StateNode(AStar):
     def heuristic_cost_estimate(self, current_node, goal_node):
         # a good starter heuristic is to take the difference in position of each of the balloons and to
         # sum them and then divide by 2
-        redDif = current_node.red_location - goal_node.red_location
-        purpleDif = current_node.purple_location - goal_node.purple_location
-        blueDif = current_node.blue_location - goal_node.blue_location
-        greenDif = current_node.green_location - goal_node.green_location
+        redDif = distance(current_node.red_location, goal_node.red_location)
+        purpleDif = distance(current_node.purple_location, goal_node.purple_location)
+        blueDif = distance(current_node.blue_location, goal_node.blue_location)
+        greenDif = distance(current_node.green_location, goal_node.green_location)
         sumDif = redDif + purpleDif + blueDif + greenDif
         return sumDif/2
 
