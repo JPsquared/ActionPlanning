@@ -94,6 +94,7 @@ if __name__ == "__main__":
         print start_pos_dict
 
     # create start node using starting balloon positions
+    start_node = None
 
     # get balloon ending positions
     with open(GOAL_JSON) as json_file:
@@ -101,6 +102,7 @@ if __name__ == "__main__":
         print end_pos_dict
 
     # create goal node using starting balloon positions
+    goal_node = None
 
     # GENERATE STATE GRAPH
     # edges need to have the f cost (g cost + h cost) and the decision that resulted in their creation
@@ -110,12 +112,10 @@ if __name__ == "__main__":
 
     # RUN A* ON STATE GRAPH TO GET OPTIMAL DECISION PATH
     # store decision path in a list
-    output = find_path(start_node, goal_node,
-                       neighbors_fnct=neighbors,
-                       reversePath=False,
-                       heuristic_cost_estimate_fnct=heuristic,
-                       distance_between_fnct=distance,
-                       is_goal_reached_fnct=is_goal_reached)
+    a_star_obj = AStar()
+
+    output = a_star_obj.astar(start_node, goal_node)
+
 
     # EXECUTE LIST OF DECISIONS
     # for each edge in decision path
