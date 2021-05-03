@@ -36,7 +36,7 @@ class StateNode(AStar):
         pass
 
     # returns a list of all children that can be generated from this node
-    def neighbors(self, node):
+    def neighbors(self, node, goal):
         to_return = []
         # create state representations of each action
         # drive to one of the four balloons or one of the four balloon goal locations
