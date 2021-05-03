@@ -1,7 +1,7 @@
 # MAIN PROJECT EXECUTABLE
 import json
 import dot_parser
-from a_star_github import AStar, find_path
+from a_star_github import AStar
 import dijkstras_algorithm
 from turtleAPI import robot
 from math import sqrt
