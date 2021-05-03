@@ -12,6 +12,10 @@ START_JSON = "states/start.json"
 GOAL_JSON = "states/simple.json"
 
 
+def distance(p1, p2):  # point: (x, y)
+    return sqrt(pow(p2[0] - p1[0], 2) + pow(p2[1] - p1[1], 2))
+
+
 # defines the structure of the data contained in each node in the A* graph
 class StateNode(AStar):
     def __init__(self, red, purple, blue, green, robot, decision):
@@ -38,7 +42,8 @@ class StateNode(AStar):
         # drive to one of the four balloons or one of the four balloon goal locations
 
         # if any of the four balloons are close, try to pick it up
-        node
+        if distance(self.robot_location, self.red_location) < 0.5:
+            to_return.append(StateNode())
 
         # try to drop a balloon off if possible
 
@@ -49,12 +54,9 @@ class StateNode(AStar):
         # might need to use dijkstra's on the hopper map to calculate this
         pass
 
-    # returns true if the values for the locations of all the balloons are in the right place
+    # returns true if the values for the locations of all the balloons are within a tolerable radius
     def is_goal_reached(self, current_node, goal_node):
-        pass
-
-# def distance(p1, p2):  # point: (x, y)
-#     return sqrt(pow(p2[0] - p1[0], 2) + pow(p2[1] - p1[1], 2))
+        radius = 0.5
 
 
 if __name__ == "__main__":
