@@ -113,7 +113,7 @@ def find_path(start, goal, neighbors_fnct, reversePath=False, heuristic_cost_est
             return distance_between_fnct(n1, n2)
 
         def neighbors(self, node, goal):
-            return neighbors_fnct(node)
+            return neighbors_fnct(node, goal)
 
         def is_goal_reached(self, current, goal):
             return is_goal_reached_fnct(current, goal)
