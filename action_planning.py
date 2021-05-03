@@ -7,6 +7,7 @@ from turtleAPI import robot
 from math import sqrt
 
 USING_BOT = True
+DOTFILE = "hopper_graph.dot"
 
 
 def distance(p1, p2):  # point: (x, y)
@@ -24,6 +25,7 @@ if __name__ == "__main__":
         current_position = rbt.getMCLPose()
 
     # get graph of world from dotfile
+    node_list, graph = dot_parser.parse_dotfile(DOTFILE)
 
     # get balloon starting positions
     with open("test_warehouse_start.json") as json_file:
