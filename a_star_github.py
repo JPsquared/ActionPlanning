@@ -85,14 +85,12 @@ class AStar:
             for neighbor in map(lambda n: searchNodes[n], self.neighbors(current.data, goal)):
                 if neighbor.closed:
                     continue
-                tentative_gscore = current.gscore + \
-                    self.distance_between(current.data, neighbor.data)
+                tentative_gscore = current.gscore + self.distance_between(current.data, neighbor.data)
                 if tentative_gscore >= neighbor.gscore:
                     continue
                 neighbor.came_from = current
                 neighbor.gscore = tentative_gscore
-                neighbor.fscore = tentative_gscore + \
-                    self.heuristic_cost_estimate(neighbor.data, goal)
+                neighbor.fscore = tentative_gscore + self.heuristic_cost_estimate(neighbor.data, goal)
                 if neighbor.out_openset:
                     neighbor.out_openset = False
                     heappush(openSet, neighbor)
