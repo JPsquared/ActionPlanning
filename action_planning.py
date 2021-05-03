@@ -56,7 +56,9 @@ class StateNode(AStar):
     def distance_between(self, node_a, node_b):
         # this should probably just be a driving distance value
         # might need to use dijkstra's on the hopper map to calculate this
-        pass
+        locA = node_a.robot_location
+        locB = node_b.robot_location
+        return distance(locA, locB)
 
     # returns true if the values for the locations of all the balloons are within a tolerable radius
     def is_goal_reached(self, current_node, goal_node):
