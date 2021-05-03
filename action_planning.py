@@ -35,6 +35,8 @@ def neighbors(current_node):
 # returns the true distance between two nodes, a and b
 # used to calculate g cost
 def distance(node_a, node_b):
+    # this should probably just be a driving distance value
+    # might need to use dijkstra's on the hopper map to calculate this
     pass
 
 
