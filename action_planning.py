@@ -1,7 +1,7 @@
 # MAIN PROJECT EXECUTABLE
 import json
 import dot_parser
-import a_star_github
+from a_star_github import AStar, find_path
 import dijkstras_algorithm
 from turtleAPI import robot
 from math import sqrt
@@ -12,13 +12,16 @@ DOTFILE = "hopper_graph.dot"
 
 # defines the structure of the data contained in each node in the A* graph
 class StateNode:
-    def __init__(self, red, purple, blue, green, robot):  # each of the parameters is a location stored in tuple form
+    def __init__(self, red, purple, blue, green, robot, decision):  # each of the parameters is a location stored in tuple form
         # if None, then the balloon is being held
         self.red_location = red
         self.purple_location = purple
         self.blue_location = blue
         self.green_location = green
         self.robot_location = robot
+        # stores the decision that was made in the previous node that caused this node to be created
+        # facilitates recreation of decision path once path is found
+        self.decision = decision
 
 
 def heuristic(current_node, goal_node):
@@ -40,8 +43,12 @@ def distance(node_a, node_b):
     pass
 
 
-def distance(p1, p2):  # point: (x, y)
-    return sqrt(pow(p2[0] - p1[0], 2) + pow(p2[1] - p1[1], 2))
+# returns true if the values for the locations of all the balloons are in the right place
+def is_goal_reached(current_node, goal_node):
+    pass
+
+# def distance(p1, p2):  # point: (x, y)
+#     return sqrt(pow(p2[0] - p1[0], 2) + pow(p2[1] - p1[1], 2))
 
 
 if __name__ == "__main__":
@@ -62,18 +69,29 @@ if __name__ == "__main__":
         start_pos_dict = json.load(json_file)
         print start_pos_dict
 
+    # create start node using starting balloon positions
+
     # get balloon ending positions
     with open("test_warehouse_end.json") as json_file:
         end_pos_dict = json.load(json_file)
         print end_pos_dict
 
+    # create goal node using starting balloon positions
+
     # GENERATE STATE GRAPH
     # edges need to have the f cost (g cost + h cost) and the decision that resulted in their creation
     # when calling generate children on a state, child states must be possible, i.e. don't create a state where all
     # three balloons are being held at once
+    # THIS MIGHT NOT NEED DONE IF THE A* ALGORITHM DOES IT FOR US
 
     # RUN A* ON STATE GRAPH TO GET OPTIMAL DECISION PATH
     # store decision path in a list
+    output = find_path(start_node, goal_node,
+                       neighbors_fnct=neighbors,
+                       reversePath=False,
+                       heuristic_cost_estimate_fnct=heuristic,
+                       distance_between_fnct=distance,
+                       is_goal_reached_fnct=is_goal_reached)
 
     # EXECUTE LIST OF DECISIONS
     # for each edge in decision path
