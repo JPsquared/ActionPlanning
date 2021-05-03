@@ -48,6 +48,7 @@ class StateNode(AStar):
 
         # figure out which balloons are on the bot
         # if any of the four balloons are close, try to pick it up
+        print self.red_location
 
         # try to drop a balloon off if possible
 
