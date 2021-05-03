@@ -2,11 +2,26 @@
 import json
 import dot_parser
 import a_star_github
+import dijkstras_algorithm
+from turtleAPI import robot
+from math import sqrt
+
+USING_BOT = True
+
+
+def distance(p1, p2):  # point: (x, y)
+    return sqrt(pow(p2[0] - p1[0], 2) + pow(p2[1] - p1[1], 2))
 
 
 if __name__ == "__main__":
     print("Action Planning Project")
+    # create robot
+    if USING_BOT:
+        rbt = robot()
+
     # use map of world to get bot position
+    if USING_BOT:
+        current_position = rbt.getMCLPose()
 
     # get graph of world from dotfile
 
@@ -33,7 +48,7 @@ if __name__ == "__main__":
         # if decision is drive
             # get current pos and goal pos
             # run dijkstra's on hopper map to find path of points
-            # drive from point to point until goal is reached
+            # drive from point to point using PID controller until goal is reached
         # if decision is pickup balloon
             # run color project to find balloon
             # add balloon to payload
