@@ -10,6 +10,11 @@ USING_BOT = True
 DOTFILE = "hopper_graph.dot"
 
 
+class StateNode:
+    def __init__(self):
+        next = ()  # tuple to store pointer to child and id of action that gets you to that child
+
+
 def distance(p1, p2):  # point: (x, y)
     return sqrt(pow(p2[0] - p1[0], 2) + pow(p2[1] - p1[1], 2))
 
