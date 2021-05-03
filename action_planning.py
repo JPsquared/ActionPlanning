@@ -1,7 +1,7 @@
 # MAIN PROJECT EXECUTABLE
 import json
 import dot_parser
-from a_star_github import AStar
+from a_star_github import AStar, find_path
 import dijkstras_algorithm
 from turtleAPI import robot
 from math import sqrt
@@ -51,6 +51,24 @@ class StateNode(AStar):
 
         # try to drop a balloon off if possible
 
+        # if action == drive (l1, l2)
+            # current state must have robot location at l1
+            # child state adds robot location l2
+            # child state removes robot location l1
+            # add child to list
+
+        # if action == pickup(b)
+            # current state must have robot carrying at most one balloon, and robot is at same location as desired balloon to pick up
+            # child state adds robot carrying new balloon
+            # child state removes balloon from location
+            # add child to list
+
+        # if action == putdown(b)
+            # current state must have robot carrying at least one balloon, and robot is located at position l
+            # child state adds ball location is now l, and robot is carrying one less balloon
+            # child state removes robot carrying one or both balloons
+
+
     # returns the true distance between two nodes, a and b
     # used to calculate g cost
     def distance_between(self, node_a, node_b):
@@ -86,34 +104,25 @@ if __name__ == "__main__":
     # use map of world to get bot position
     if USING_BOT:
         current_position = rbt.getMCLPose()
-    else:
-        current_position = None
 
     # get graph of world from dotfile
     node_list, graph = dot_parser.parse_dotfile(DOTFILE)
 
     # get balloon starting positions
-    start_pos_dict = json.load(open(START_JSON))
+    with open(START_JSON) as json_file:
+        start_pos_dict = json.load(json_file)
+        print start_pos_dict
 
     # create start node using starting balloon positions
-    start_red_tuple = (start_pos_dict['RED'][0], start_pos_dict['RED'][1])
-    start_purple_tuple = (start_pos_dict['PURPLE'][0], start_pos_dict['PURPLE'][1])
-    start_blue_tuple = (start_pos_dict['BLUE'][0], start_pos_dict['BLUE'][1])
-    start_green_tuple = (start_pos_dict['GREEN'][0], start_pos_dict['GREEN'][1])
-
-    start_node = StateNode(start_red_tuple, start_purple_tuple, start_blue_tuple, start_green_tuple, current_position, None)
+    start_node = None
 
     # get balloon ending positions
-    goal_pos_dict = json.load(open(GOAL_JSON))
+    with open(GOAL_JSON) as json_file:
+        end_pos_dict = json.load(json_file)
+        print end_pos_dict
 
     # create goal node using starting balloon positions
-    goal_red_tuple = (goal_pos_dict['RED'][0], goal_pos_dict['RED'][1])
-    goal_purple_tuple = (goal_pos_dict['PURPLE'][0], goal_pos_dict['PURPLE'][1])
-    goal_blue_tuple = (goal_pos_dict['BLUE'][0], goal_pos_dict['BLUE'][1])
-    goal_green_tuple = (goal_pos_dict['GREEN'][0], goal_pos_dict['GREEN'][1])
-
-    goal_node = StateNode(goal_red_tuple, goal_purple_tuple, goal_blue_tuple, goal_green_tuple, None, None)
-
+    goal_node = None
 
     # GENERATE STATE GRAPH
     # edges need to have the f cost (g cost + h cost) and the decision that resulted in their creation
@@ -125,7 +134,8 @@ if __name__ == "__main__":
     # store decision path in a list
     a_star_obj = AStar()
 
-    path = a_star_obj.astar(start_node, goal_node)
+    output = a_star_obj.astar(start_node, goal_node)
+
 
     # EXECUTE LIST OF DECISIONS
     # for each edge in decision path
