@@ -8,6 +8,8 @@ from math import sqrt
 
 USING_BOT = True
 DOTFILE = "hopper_graph.dot"
+START_JSON = "states/start.json"
+GOAL_JSON = "states/simple.json"
 
 
 # defines the structure of the data contained in each node in the A* graph
@@ -65,14 +67,14 @@ if __name__ == "__main__":
     node_list, graph = dot_parser.parse_dotfile(DOTFILE)
 
     # get balloon starting positions
-    with open("test_warehouse_start.json") as json_file:
+    with open(START_JSON) as json_file:
         start_pos_dict = json.load(json_file)
         print start_pos_dict
 
     # create start node using starting balloon positions
 
     # get balloon ending positions
-    with open("test_warehouse_end.json") as json_file:
+    with open(GOAL_JSON) as json_file:
         end_pos_dict = json.load(json_file)
         print end_pos_dict
 
