@@ -48,7 +48,7 @@ class AStar:
         raise NotImplementedError
 
     @abstractmethod
-    def neighbors(self, node):
+    def neighbors(self, node, goal):
         """For a given node, returns (or yields) the list of its neighbors. this method must be implemented in a
         subclass"""
         raise NotImplementedError
@@ -82,7 +82,7 @@ class AStar:
                 return self.reconstruct_path(current, reversePath)
             current.out_openset = True
             current.closed = True
-            for neighbor in map(lambda n: searchNodes[n], self.neighbors(current.data)):
+            for neighbor in map(lambda n: searchNodes[n], self.neighbors(current.data, goal)):
                 if neighbor.closed:
                     continue
                 tentative_gscore = current.gscore + \
