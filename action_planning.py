@@ -10,12 +10,31 @@ USING_BOT = True
 DOTFILE = "hopper_graph.dot"
 
 
+# defines the structure of the data contained in each node in the A* graph
 class StateNode:
-    def __init__(self):
-        next = ()  # tuple to store pointer to child and id of action that gets you to that child
+    def __init__(self, red, purple, blue, green, robot):  # each of the parameters is a location stored in tuple form
+        # if None, then the balloon is being held
+        self.red_location = red
+        self.purple_location = purple
+        self.blue_location = blue
+        self.green_location = green
+        self.robot_location = robot
 
 
 def heuristic(current_node, goal_node):
+    # a good starter heuristic is to take the difference in position of each of the balloons and to
+    # sum them and then divide by 2
+    pass
+
+
+# returns a list of all children that can be generated from this node
+def neighbors(current_node):
+    pass
+
+
+# returns the true distance between two nodes, a and b
+# used to calculate g cost
+def distance(node_a, node_b):
     pass
 
 
