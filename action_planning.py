@@ -15,6 +15,10 @@ class StateNode:
         next = ()  # tuple to store pointer to child and id of action that gets you to that child
 
 
+def heuristic(current_node, goal_node):
+    pass
+
+
 def distance(p1, p2):  # point: (x, y)
     return sqrt(pow(p2[0] - p1[0], 2) + pow(p2[1] - p1[1], 2))
 
