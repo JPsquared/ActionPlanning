@@ -69,7 +69,6 @@ class StateNode(AStar):
             # child state removes robot carrying one or both balloons
             # add child to list
 
-
     # returns the true distance between two nodes, a and b
     # used to calculate g cost
     def distance_between(self, node_a, node_b):
