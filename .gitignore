@@ -7,3 +7,6 @@
 
 # ignore swapfiles
 *.swp
+
+# ignore test file
+test.py
