@@ -86,25 +86,34 @@ if __name__ == "__main__":
     # use map of world to get bot position
     if USING_BOT:
         current_position = rbt.getMCLPose()
+    else:
+        current_position = None
 
     # get graph of world from dotfile
     node_list, graph = dot_parser.parse_dotfile(DOTFILE)
 
     # get balloon starting positions
-    with open(START_JSON) as json_file:
-        start_pos_dict = json.load(json_file)
-        print start_pos_dict
+    start_pos_dict = json.load(open(START_JSON))
 
     # create start node using starting balloon positions
-    start_node = None
+    start_red_tuple = (start_pos_dict['RED'][0], start_pos_dict['RED'][1])
+    start_purple_tuple = (start_pos_dict['PURPLE'][0], start_pos_dict['PURPLE'][1])
+    start_blue_tuple = (start_pos_dict['BLUE'][0], start_pos_dict['BLUE'][1])
+    start_green_tuple = (start_pos_dict['GREEN'][0], start_pos_dict['GREEN'][1])
+
+    start_node = StateNode(start_red_tuple, start_purple_tuple, start_blue_tuple, start_green_tuple, current_position, None)
 
     # get balloon ending positions
-    with open(GOAL_JSON) as json_file:
-        end_pos_dict = json.load(json_file)
-        print end_pos_dict
+    goal_pos_dict = json.load(open(GOAL_JSON))
 
     # create goal node using starting balloon positions
-    goal_node = None
+    goal_red_tuple = (goal_pos_dict['RED'][0], goal_pos_dict['RED'][1])
+    goal_purple_tuple = (goal_pos_dict['PURPLE'][0], goal_pos_dict['PURPLE'][1])
+    goal_blue_tuple = (goal_pos_dict['BLUE'][0], goal_pos_dict['BLUE'][1])
+    goal_green_tuple = (goal_pos_dict['GREEN'][0], goal_pos_dict['GREEN'][1])
+
+    goal_node = StateNode(goal_red_tuple, goal_purple_tuple, goal_blue_tuple, goal_green_tuple, None, None)
+
 
     # GENERATE STATE GRAPH
     # edges need to have the f cost (g cost + h cost) and the decision that resulted in their creation
