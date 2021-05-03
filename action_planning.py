@@ -114,8 +114,7 @@ if __name__ == "__main__":
     # store decision path in a list
     a_star_obj = AStar()
 
-    output = a_star_obj.astar(start_node, goal_node)
-
+    path = a_star_obj.astar(start_node, goal_node)
 
     # EXECUTE LIST OF DECISIONS
     # for each edge in decision path
