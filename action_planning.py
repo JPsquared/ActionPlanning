@@ -41,8 +41,9 @@ class StateNode(AStar):
         # create state representations of each action
         # drive to one of the four balloons or one of the four balloon goal locations
 
-        # figure out which balloons are on the bot
         # if any of the four balloons are close, try to pick it up
+        if distance(self.robot_location, self.red_location) < 0.5:
+            to_return.append(StateNode())
 
         # try to drop a balloon off if possible
 
@@ -55,7 +56,19 @@ class StateNode(AStar):
 
     # returns true if the values for the locations of all the balloons are within a tolerable radius
     def is_goal_reached(self, current_node, goal_node):
-        radius = 0.5
+        checklist = 0
+        if abs(current_node.red_location - goal_node.red_location) < 0.5:
+            checklist += 1
+        if abs(current_node.purple_location - goal_node.purple_location) < 0.5:
+            checklist += 1
+        if abs(current_node.blue_location - goal_node.blue_location) < 0.5:
+            checklist += 1
+        if abs(current_node.green_location - goal_node.green_location) < 0.5:
+            checklist += 1
+        if checklist == 4:
+            return True
+        else:
+            return False
 
 
 if __name__ == "__main__":
