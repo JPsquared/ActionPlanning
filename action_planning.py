@@ -67,6 +67,7 @@ class StateNode(AStar):
             # current state must have robot carrying at least one balloon, and robot is located at position l
             # child state adds ball location is now l, and robot is carrying one less balloon
             # child state removes robot carrying one or both balloons
+            # add child to list
 
 
     # returns the true distance between two nodes, a and b
