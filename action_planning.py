@@ -35,15 +35,15 @@ if __name__ == "__main__":
         end_pos_dict = json.load(json_file)
         print end_pos_dict
 
-    # generate state graph
+    # GENERATE STATE GRAPH
     # edges need to have the f cost (g cost + h cost) and the decision that resulted in their creation
     # when calling generate children on a state, child states must be possible, i.e. don't create a state where all
     # three balloons are being held at once
 
-    # run A* on state graph to get optimal decision path
+    # RUN A* ON STATE GRAPH TO GET OPTIMAL DECISION PATH
     # store decision path in a list
 
-    # execute list of decisions
+    # EXECUTE LIST OF DECISIONS
     # for each edge in decision path
         # if decision is drive
             # get current pos and goal pos
