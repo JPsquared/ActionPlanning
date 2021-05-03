@@ -81,13 +81,13 @@ class StateNode(AStar):
     # returns true if the values for the locations of all the balloons are within a tolerable radius
     def is_goal_reached(self, current_node, goal_node):
         checklist = 0
-        if abs(current_node.red_location - goal_node.red_location) < 0.5:
+        if distance(current_node.red_location, goal_node.red_location) < 0.5:
             checklist += 1
-        if abs(current_node.purple_location - goal_node.purple_location) < 0.5:
+        if distance(current_node.purple_location, goal_node.purple_location) < 0.5:
             checklist += 1
-        if abs(current_node.blue_location - goal_node.blue_location) < 0.5:
+        if distance(current_node.blue_location, goal_node.blue_location) < 0.5:
             checklist += 1
-        if abs(current_node.green_location - goal_node.green_location) < 0.5:
+        if distance(current_node.green_location, goal_node.green_location) < 0.5:
             checklist += 1
         if checklist == 4:
             return True
