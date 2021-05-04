@@ -10,7 +10,7 @@ USING_BOT = True
 DOTFILE = "hopper_graph.dot"
 START_JSON = "states/start.json"
 GOAL_JSON = "states/simple.json"
-PICKUP_RADIUS = 0.5  # radius within which the option to pick up a balloon is available
+PICKUP_RADIUS = 2  # radius within which the option to pick up a balloon is available
 
 
 def distance(p1, p2):  # point: (x, y)
@@ -88,10 +88,17 @@ class StateNode(AStar):
                 if not onBot[key]:  # if the balloon in question is not on the bot
                     if key == 'red':
                         # add a new state to the list for adding the red balloon to the bot
-                        to_return.append(StateNode())
+                        if distance(self.red_location, self.robot_location) <= PICKUP_RADIUS:
+                            to_return.append(StateNode(None, self.purple_location, self.blue_location, self.green_location, self.robot_location, 'PICKUP RED'))
                     if key == 'purple':
+                        if distance(self.purple_location, self.robot_location) <= PICKUP_RADIUS:
+                            to_return.append(StateNode(self.red_location, None, self.blue_location, self.green_location, self.robot_location, 'PICKUP PURPLE'))
                     if key == 'blue':
+                        if distance(self.blue_location, self.robot_location) <= PICKUP_RADIUS:
+                            to_return.append(StateNode(self.red_location, self.purple_location, None, self.green_location, self.robot_location, 'PICKUP BLUE'))
                     if key == 'green':
+                        if distance(self.green_location, self.robot_location) <= PICKUP_RADIUS:
+                            to_return.append(StateNode(self.red_location, self.purple_location, self.blue_location, None, self.robot_location, 'PICKUP GREEN'))
 
         # if action == putdown(b)
             # current state must have robot carrying at least one balloon, and robot is located at position l
