@@ -1,7 +1,7 @@
 # MAIN PROJECT EXECUTABLE
 import json
 import dot_parser
-from a_star_github import AStar
+from a_star_github import AStar, find_path
 import dijkstras_algorithm
 # from turtleAPI import robot
 from math import sqrt
@@ -138,10 +138,14 @@ if __name__ == "__main__":
 
     # RUN A* ON STATE GRAPH TO GET OPTIMAL DECISION PATH
     # store decision path in a list
-    a_star_obj = AStar()
-
-    output = a_star_obj.astar(start_node, goal_node)
-
+    # a_star_obj = StateNode()  # doesn't work
+    # output = StateNode().astar(start_node, goal_node)  # doesn't work
+    path = find_path(start_node, goal_node,
+                     StateNode.neighbors,
+                     False,
+                     StateNode.heuristic_cost_estimate,
+                     StateNode.distance_between,
+                     StateNode.is_goal_reached)
 
     # EXECUTE LIST OF DECISIONS
     # for each edge in decision path
