@@ -95,6 +95,15 @@ class StateNode(AStar):
         else:
             return False
 
+    def __str__(self):
+        return str({'red': self.red_location,
+                    'purple': self.purple_location,
+                    'blue': self.blue_location,
+                    'green': self.green_location,
+                    'pos': self.robot_location,
+                    'decision': self.decision
+                    })
+
 
 if __name__ == "__main__":
     print("Action Planning Project")
@@ -130,6 +139,10 @@ if __name__ == "__main__":
 
     goal_node = StateNode(goal_red_tuple, goal_purple_tuple, goal_blue_tuple, goal_green_tuple, None, None)
 
+    # TEST SECTION #
+    print start_node
+    print goal_node
+    # END TEST SECTION #
 
     # GENERATE STATE GRAPH
     # edges need to have the f cost (g cost + h cost) and the decision that resulted in their creation
