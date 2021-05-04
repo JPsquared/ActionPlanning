@@ -82,18 +82,18 @@ class StateNode(AStar):
             # add child to list
         # ADD CHILDREN STATES AFTER PUTDOWN CALL
         for key in onBot.keys():
-            if onBot[key] == 1:
+            if onBot[key]:
                 # this balloon is on the bot and can be put down at the current location
                 # create a new state and add it to the list
                 # IF THIS RESULTS IN UNEXPECTED BEHAVIOR, TRY CHANGING SELF TO NODE
                 if key == 'red':
-                    to_return.append(StateNode(self.robot_location, self.purple_location, self.blue_location, self.green_location, self.robot_location, 'PUTDOWN_RED'))
+                    to_return.append(StateNode(self.robot_location, self.purple_location, self.blue_location, self.green_location, self.robot_location, 'PUTDOWN RED'))
                 if key == 'purple':
-                    to_return.append(StateNode(self.red_location, self.robot_location, self.blue_location, self.green_location, self.robot_location, 'PUTDOWN_PURPLE'))
+                    to_return.append(StateNode(self.red_location, self.robot_location, self.blue_location, self.green_location, self.robot_location, 'PUTDOWN PURPLE'))
                 if key == 'blue':
-                    to_return.append(StateNode(self.red_location, self.purple_location, self.robot_location, self.green_location, self.robot_location, 'PUTDOWN_BLUE'))
+                    to_return.append(StateNode(self.red_location, self.purple_location, self.robot_location, self.green_location, self.robot_location, 'PUTDOWN BLUE'))
                 if key == 'green':
-                    to_return.append(StateNode(self.green_location, self.purple_location, self.blue_location, self.robot_location, self.robot_location, 'PUTDOWN_GREEN'))
+                    to_return.append(StateNode(self.green_location, self.purple_location, self.blue_location, self.robot_location, self.robot_location, 'PUTDOWN GREEN'))
 
         return []
 
@@ -179,8 +179,6 @@ if __name__ == "__main__":
 
     # RUN A* ON STATE GRAPH TO GET OPTIMAL DECISION PATH
     # store decision path in a list
-    # a_star_obj = StateNode()  # doesn't work
-    # output = StateNode().astar(start_node, goal_node)  # doesn't work
     path = find_path(start_node, goal_node,
                      StateNode.neighbors,
                      False,
@@ -200,3 +198,5 @@ if __name__ == "__main__":
         # if decision is putdown balloon
             # print that the balloon was put down
             # remove balloon from payload
+    for node in path:
+        decision = node.data.decision
