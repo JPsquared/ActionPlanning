@@ -50,13 +50,13 @@ class StateNode(AStar):
 
         # figure out which balloons are on the bot
         onBot = {'red': False, 'purple': False, 'blue': False, 'green': False}
-        if self.red_location is not None:
+        if self.red_location is None:
             onBot['red'] = True
-        if self.purple_location is not None:
+        if self.purple_location is None:
             onBot['purple'] = True
-        if self.blue_location is not None:
+        if self.blue_location is None:
             onBot['blue'] = True
-        if self.green_location is not None:
+        if self.green_location is None:
             onBot['green'] = True
 
         # figure out how many balloons are on the bot
@@ -106,6 +106,8 @@ class StateNode(AStar):
                         if distance(self.red_location, self.robot_location) <= PICKUP_RADIUS:
                             to_return.append(StateNode(None, self.purple_location, self.blue_location, self.green_location, self.robot_location, 'PICKUP RED'))
                     if key == 'purple':
+                        # print self.purple_location
+                        # print self.robot_location
                         if distance(self.purple_location, self.robot_location) <= PICKUP_RADIUS:
                             to_return.append(StateNode(self.red_location, None, self.blue_location, self.green_location, self.robot_location, 'PICKUP PURPLE'))
                     if key == 'blue':
@@ -179,7 +181,7 @@ if __name__ == "__main__":
 
     # use map of world to get bot position
     # current_position = rbt.getMCLPose()
-    current_position = None
+    current_position = (6.9, 9.6)
 
     # get graph of world from dotfile
     node_list, graph = dot_parser.parse_dotfile(DOTFILE)
@@ -207,8 +209,8 @@ if __name__ == "__main__":
     goal_node = StateNode(goal_red_tuple, goal_purple_tuple, goal_blue_tuple, goal_green_tuple, None, None)
 
     # TEST SECTION #
-    print start_node
-    print goal_node
+    # print start_node
+    # print goal_node
     # END TEST SECTION #
 
     # GENERATE STATE GRAPH
