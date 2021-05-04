@@ -98,14 +98,11 @@ class StateNode(AStar):
 if __name__ == "__main__":
     print("Action Planning Project")
     # create robot
-    if USING_BOT:
-        rbt = robot()
+    # rbt = robot()
 
     # use map of world to get bot position
-    if USING_BOT:
-        current_position = rbt.getMCLPose()
-    else:
-        current_position = None
+    # current_position = rbt.getMCLPose()
+    current_position = None
 
     # get graph of world from dotfile
     node_list, graph = dot_parser.parse_dotfile(DOTFILE)
