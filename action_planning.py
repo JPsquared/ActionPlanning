@@ -43,10 +43,12 @@ class StateNode(AStar):
     # returns a list of all children that can be generated from this node
     def neighbors(self, node, goal):
         to_return = []
+
         # create state representations of each action
         # drive to one of the four balloons or one of the four balloon goal locations
 
         # figure out which balloons are on the bot
+        onBot = {'red': False, 'purple': False, 'blue': False, 'green': False}
         # if any of the four balloons are close, try to pick it up
 
         # try to drop a balloon off if possible
@@ -68,6 +70,13 @@ class StateNode(AStar):
             # child state adds ball location is now l, and robot is carrying one less balloon
             # child state removes robot carrying one or both balloons
             # add child to list
+        for key in onBot.keys():
+            if onBot[key] == 1:
+                # this balloon is on the bot and can be put down at the current location
+                # create a new state and add it to the list
+                if key == 'red':
+                    to_return.append(StateNode())
+
         return []
 
     # returns the true distance between two nodes, a and b
