@@ -77,6 +77,22 @@ class StateNode(AStar):
             # child state adds robot location l2
             # child state removes robot location l1
             # add child to list
+        to_return.append(StateNode(self.red_location, self.purple_location, self.blue_location, self.green_location, goal.red_location, 'DRIVE GOAL RED'))
+        to_return.append(StateNode(self.red_location, self.purple_location, self.blue_location, self.green_location, goal.purple_location, 'DRIVE GOAL PURPLE'))
+        to_return.append(StateNode(self.red_location, self.purple_location, self.blue_location, self.green_location, goal.blue_location, 'DRIVE GOAL BLUE'))
+        to_return.append(StateNode(self.red_location, self.purple_location, self.blue_location, self.green_location, goal.green_location, 'DRIVE GOAL GREEN'))
+
+        # of the balloons not on the bot, create nodes to drive to them also
+        for key in onBot.keys():
+            if not onBot[key]:
+                if key == 'red':
+                    to_return.append(StateNode(self.red_location, self.purple_location, self.blue_location, self.green_location, self.red_location, 'DRIVE CURRENT RED'))
+                if key == 'purple':
+                    to_return.append(StateNode(self.red_location, self.purple_location, self.blue_location, self.green_location, self.purple_location, 'DRIVE CURRENT PURPLE'))
+                if key == 'blue':
+                    to_return.append(StateNode(self.red_location, self.purple_location, self.blue_location, self.green_location, self.blue_location, 'DRIVE CURRENT BLUE'))
+                if key == 'green':
+                    to_return.append(StateNode(self.red_location, self.purple_location, self.blue_location, self.green_location, self.green_location, 'DRIVE CURRENT GREEN'))
 
         # if action == pickup(b)
             # current state must have robot carrying at most one balloon, and robot is at same location as desired balloon to pick up
@@ -87,7 +103,6 @@ class StateNode(AStar):
             if numOnBot < 2:  # if there are less than two balloons on board the bot
                 if not onBot[key]:  # if the balloon in question is not on the bot
                     if key == 'red':
-                        # add a new state to the list for adding the red balloon to the bot
                         if distance(self.red_location, self.robot_location) <= PICKUP_RADIUS:
                             to_return.append(StateNode(None, self.purple_location, self.blue_location, self.green_location, self.robot_location, 'PICKUP RED'))
                     if key == 'purple':
@@ -120,7 +135,7 @@ class StateNode(AStar):
                 if key == 'green':
                     to_return.append(StateNode(self.green_location, self.purple_location, self.blue_location, self.robot_location, self.robot_location, 'PUTDOWN GREEN'))
 
-        return []
+        return [to_return]
 
     # returns the true distance between two nodes, a and b
     # used to calculate g cost
