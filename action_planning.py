@@ -10,6 +10,7 @@ USING_BOT = True
 DOTFILE = "hopper_graph.dot"
 START_JSON = "states/start.json"
 GOAL_JSON = "states/simple.json"
+PICKUP_RADIUS = 0.5  # radius within which the option to pick up a balloon is available
 
 
 def distance(p1, p2):  # point: (x, y)
@@ -49,7 +50,14 @@ class StateNode(AStar):
 
         # figure out which balloons are on the bot
         onBot = {'red': False, 'purple': False, 'blue': False, 'green': False}
-
+        if self.red_location is not None:
+            onBot['red'] = True
+        if self.purple_location is not None:
+            onBot['purple'] = True
+        if self.blue_location is not None:
+            onBot['blue'] = True
+        if self.green_location is not None:
+            onBot['green'] = True
 
         # if any of the four balloons are close, try to pick it up
 
@@ -77,13 +85,15 @@ class StateNode(AStar):
             if onBot[key] == 1:
                 # this balloon is on the bot and can be put down at the current location
                 # create a new state and add it to the list
-                # IF THIS RESULTS IN UNEXPECTED BEHAVIOR, TRY CHANGING SELF TO NODE if key == 'red': to_return.append(StateNode(self.robot_location, self.purple_location, self.blue_location, self.green_location, self.robot_location, 'PUTDOWN_RED'))
+                # IF THIS RESULTS IN UNEXPECTED BEHAVIOR, TRY CHANGING SELF TO NODE
+                if key == 'red':
+                    to_return.append(StateNode(self.robot_location, self.purple_location, self.blue_location, self.green_location, self.robot_location, 'PUTDOWN_RED'))
                 if key == 'purple':
                     to_return.append(StateNode(self.red_location, self.robot_location, self.blue_location, self.green_location, self.robot_location, 'PUTDOWN_PURPLE'))
                 if key == 'blue':
-                    to_return.append()
+                    to_return.append(StateNode(self.red_location, self.purple_location, self.robot_location, self.green_location, self.robot_location, 'PUTDOWN_BLUE'))
                 if key == 'green':
-                    to_return.append()
+                    to_return.append(StateNode(self.green_location, self.purple_location, self.blue_location, self.robot_location, self.robot_location, 'PUTDOWN_GREEN'))
 
         return []
 
