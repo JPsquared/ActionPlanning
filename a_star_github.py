@@ -118,6 +118,7 @@ def find_path(start, goal, neighbors_fnct, reversePath=False, heuristic_cost_est
 
         def is_goal_reached(self, current, goal):
             return is_goal_reached_fnct(current, goal)
+
     return FindPath().astar(start, goal, reversePath)
 
 
