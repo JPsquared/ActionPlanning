@@ -28,7 +28,6 @@ def parse_dotfile(filename):
         elif parts[1][0] == '-':  # these are lines that contain graph connections
             key = parts[0]
             connection = search(r'[0-9][ab]', parts[1]).group()
-            print connection
             if key in graph:
                 graph[key].append(connection)
             else:
