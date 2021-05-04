@@ -84,11 +84,14 @@ class StateNode(AStar):
             # child state removes balloon from location
             # add child to list
         for key in onBot.keys():
-            if not onBot[key]:
-                if key == 'red':
-                if key == 'purple':
-                if key == 'blue':
-                if key == 'green':
+            if numOnBot < 2:  # if there are less than two balloons on board the bot
+                if not onBot[key]:  # if the balloon in question is not on the bot
+                    if key == 'red':
+                        # add a new state to the list for adding the red balloon to the bot
+                        to_return.append(StateNode())
+                    if key == 'purple':
+                    if key == 'blue':
+                    if key == 'green':
 
         # if action == putdown(b)
             # current state must have robot carrying at least one balloon, and robot is located at position l
