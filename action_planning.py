@@ -49,6 +49,8 @@ class StateNode(AStar):
 
         # figure out which balloons are on the bot
         onBot = {'red': False, 'purple': False, 'blue': False, 'green': False}
+
+
         # if any of the four balloons are close, try to pick it up
 
         # try to drop a balloon off if possible
@@ -70,12 +72,18 @@ class StateNode(AStar):
             # child state adds ball location is now l, and robot is carrying one less balloon
             # child state removes robot carrying one or both balloons
             # add child to list
+        # ADD CHILDREN STATES AFTER PUTDOWN CALL
         for key in onBot.keys():
             if onBot[key] == 1:
                 # this balloon is on the bot and can be put down at the current location
                 # create a new state and add it to the list
-                if key == 'red':
-                    to_return.append(StateNode())
+                # IF THIS RESULTS IN UNEXPECTED BEHAVIOR, TRY CHANGING SELF TO NODE if key == 'red': to_return.append(StateNode(self.robot_location, self.purple_location, self.blue_location, self.green_location, self.robot_location, 'PUTDOWN_RED'))
+                if key == 'purple':
+                    to_return.append(StateNode(self.red_location, self.robot_location, self.blue_location, self.green_location, self.robot_location, 'PUTDOWN_PURPLE'))
+                if key == 'blue':
+                    to_return.append()
+                if key == 'green':
+                    to_return.append()
 
         return []
 
