@@ -106,18 +106,20 @@ def find_path(start, goal, neighbors_fnct, reversePath=False, heuristic_cost_est
               distance_between_fnct=lambda a, b: 1.0, is_goal_reached_fnct=lambda a, b: a == b):
     """A non-class version of the path finding algorithm"""
     class FindPath(AStar):
-
+        # for each of the return values below, an object of type StateNode must be passed in as the first parameter
+        # to the function call so the function knows the context of the other arguments
+        # that is why the first argument is duplicated
         def heuristic_cost_estimate(self, current, goal):
-            return heuristic_cost_estimate_fnct(current, goal)
+            return heuristic_cost_estimate_fnct(current, current, goal)
 
         def distance_between(self, n1, n2):
-            return distance_between_fnct(n1, n2)
+            return distance_between_fnct(n1, n1, n2)
 
         def neighbors(self, node, goal):
-            return neighbors_fnct(node, goal)
+            return neighbors_fnct(node, node, goal)
 
         def is_goal_reached(self, current, goal):
-            return is_goal_reached_fnct(current, goal)
+            return is_goal_reached_fnct(current, current, goal)
 
     return FindPath().astar(start, goal, reversePath)
 
