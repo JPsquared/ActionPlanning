@@ -68,6 +68,7 @@ class StateNode(AStar):
             # child state adds ball location is now l, and robot is carrying one less balloon
             # child state removes robot carrying one or both balloons
             # add child to list
+        return []
 
     # returns the true distance between two nodes, a and b
     # used to calculate g cost
