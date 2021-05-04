@@ -83,6 +83,7 @@ class AStar:
                 return self.reconstruct_path(current, reversePath)
             current.out_openset = True
             current.closed = True
+            # print str(self.neighbors(current.data, goal))  # #############################################
             for neighbor in map(lambda n: searchNodes[n], self.neighbors(current.data, goal)):
                 if neighbor.closed:
                     continue
