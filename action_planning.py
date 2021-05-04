@@ -11,9 +11,6 @@ DOTFILE = "hopper_graph.dot"
 START_JSON = "states/start.json"
 GOAL_JSON = "states/simple.json"
 
-if USING_BOT:
-    from turtleAPI import robot
-
 
 def distance(p1, p2):  # point: (x, y)
     return sqrt(pow(p2[0] - p1[0], 2) + pow(p2[1] - p1[1], 2))
