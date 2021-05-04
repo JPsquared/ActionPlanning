@@ -59,6 +59,15 @@ class StateNode(AStar):
         if self.green_location is not None:
             onBot['green'] = True
 
+        # figure out how many balloons are on the bot
+        numOnBot = 0
+        for key in onBot.keys():
+            if onBot[key]:
+                numOnBot += 1
+
+        if numOnBot > 2:
+            print 'ERROR: MORE THAN TWO BALLOONS ON BOT IN STATE'
+
         # if any of the four balloons are close, try to pick it up
 
         # try to drop a balloon off if possible
@@ -74,6 +83,12 @@ class StateNode(AStar):
             # child state adds robot carrying new balloon
             # child state removes balloon from location
             # add child to list
+        for key in onBot.keys():
+            if not onBot[key]:
+                if key == 'red':
+                if key == 'purple':
+                if key == 'blue':
+                if key == 'green':
 
         # if action == putdown(b)
             # current state must have robot carrying at least one balloon, and robot is located at position l
