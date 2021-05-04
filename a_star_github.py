@@ -72,6 +72,7 @@ class AStar:
     def astar(self, start, goal, reversePath=False):
         if self.is_goal_reached(start, goal):
             return [start]
+        # print start
         searchNodes = AStar.SearchNodeDict()
         startNode = searchNodes[start] = AStar.SearchNode(
             start, gscore=.0, fscore=self.heuristic_cost_estimate(start, goal))
@@ -85,6 +86,7 @@ class AStar:
             current.closed = True
             # print str(self.neighbors(current.data, goal))  # #############################################
             for neighbor in map(lambda n: searchNodes[n], self.neighbors(current.data, goal)):
+            # for neighbor in self.neighbors(current.data, goal)[0]:
                 if neighbor.closed:
                     continue
                 tentative_gscore = current.gscore + self.distance_between(current.data, neighbor.data)

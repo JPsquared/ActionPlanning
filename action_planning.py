@@ -228,6 +228,8 @@ if __name__ == "__main__":
                      StateNode.distance_between,
                      StateNode.is_goal_reached)
 
+    print path
+
     # EXECUTE LIST OF DECISIONS
     # for each edge in decision path
         # if decision is drive
